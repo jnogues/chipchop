@@ -8,8 +8,8 @@ Generic_LM75_12Bit temperature;
 #include <Adafruit_NeoPixel.h>
 
 // Which pin on the Arduino is connected to the NeoPixels?
-#define PIN 15 // On Trinket or Gemma, suggest changing this to 1
-#define NUMPIXELS 1// Popular NeoPixel ring size
+#define PIN 15 // 
+#define NUMPIXELS 1 // 
 Adafruit_NeoPixel pixels(NUMPIXELS, PIN, NEO_GRB + NEO_KHZ800);
 
 #ifdef ESP32
@@ -38,7 +38,7 @@ String auth_code = "... your Security Authentication Code ..."; //found in the D
 
 String device_id = "... your Device ID ..."; // same id as in the Dev Console > Devices for this device
 
-////// ***** Led variables ***** //////
+////// ***** GPIO variables ***** //////
 
 String gpio13_status = "OFF"; // the device will start with the led turned off
 String gpio0_status = "OFF"; // the device will start with the led turned off
@@ -55,10 +55,6 @@ int green=0;
 int blue=0;
 int dimmer=10;
 String dimmer_status = "10";
-float factor = 1.0;
-float redFloat = 0.0;
-float greenFloat = 0.0;
-float blueFloat = 0.0;
 
 // ChipChop callback function triggered every time you send a command to your device
 // this callback will handle the switching of the led on/off
@@ -175,6 +171,7 @@ void setup()
     digitalWrite(0,HIGH);
     digitalWrite(2,HIGH);
 
+    // Test neopixel at boot 
     pixels.begin(); // INITIALIZE NeoPixel strip object (REQUIRED)
     pixels.clear(); // Set all pixel colors to 'off'
     pixels.setPixelColor(0, pixels.Color(255, 0, 0));
@@ -197,7 +194,8 @@ void setup()
     ChipChop.start(server_uri, uuid, device_id, auth_code);
     ChipChop.hearBeatInterval(10);
     ChipChop.debug(true); // enables log messages from the ChipChop library, set to false in production
-   
+
+    // Tasks  
     tasker.setInterval(blinkLed16, 1000);
     tasker.setInterval(update2server, 10000);
     tasker.setInterval(triggers2server, 100);
