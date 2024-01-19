@@ -1,3 +1,3 @@
 # chipchop
 
-Examples using IOT [chipchop.io platform](http://chipchop.io/).
+Examples using IOT [chipchop platform](http://chipchop.io).
